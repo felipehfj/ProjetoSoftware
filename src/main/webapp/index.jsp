@@ -6,6 +6,7 @@
     <title>Admin</title>
   </head>
   <body>
+
   Admin ${admin}.
   </body>
 </html>

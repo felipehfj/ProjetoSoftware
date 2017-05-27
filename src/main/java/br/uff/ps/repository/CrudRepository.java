@@ -17,7 +17,7 @@ public class CrudRepository<T> {
     }
 
     public <S extends T> S save(S entity) {
-        Session session = hibernateFactory.openSession();
+        Session session = hibernateFactory.openSession(); // Referencia do FrameWork Hibernate
         session.save(entity);
         session.close();
         return entity;
