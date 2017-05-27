@@ -1,5 +1,6 @@
 package br.uff.ps.repository;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -38,6 +39,12 @@ public abstract class AbstractRepository<T> {
     public void delete(T entity) {
         Session session = hibernateFactory.openSession();
         session.delete(entity);
+        session.close();
+    }
+
+    public void executeQuery(String query) {
+        Session session = hibernateFactory.openSession();
+        Query q = session.createQuery(query);
         session.close();
     }
 }

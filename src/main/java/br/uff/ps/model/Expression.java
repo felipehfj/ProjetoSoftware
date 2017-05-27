@@ -14,6 +14,13 @@ public class Expression {
 
     private String expression;
 
+    public Expression() {
+    }
+
+    public Expression(String expression) {
+        this.expression = expression;
+    }
+
     public Long getId() {
         return id;
     }
