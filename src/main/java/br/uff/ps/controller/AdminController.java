@@ -1,6 +1,7 @@
 package br.uff.ps.controller;
 
 import br.uff.ps.model.Admin;
+import br.uff.ps.model.Expression;
 import br.uff.ps.repository.CrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.net.URI;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
@@ -39,4 +41,7 @@ public class AdminController {
         Admin admin = repository.findOne(id,Admin.class);
         return ResponseEntity.ok().body(admin);
     }
+
+
+
 }

@@ -1,5 +1,6 @@
 package br.uff.ps.repository;
 
+import br.uff.ps.model.Expression;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
@@ -41,5 +42,15 @@ public class CrudRepository<T> {
         Session session = hibernateFactory.openSession();
         session.delete(entity);
         session.close();
+    }
+
+    public List<Expression> findByWord(String word) {
+        Session session = hibernateFactory.openSession();
+        List<Expression> result = session.createSQLQuery("select * from expression" +
+                                                                    " where expression " +
+                                                                "LIKE :searchKeyword").setParameter("searchKeyword","%"+word+"%").list();
+        session.close();
+        return result;
+
     }
 }

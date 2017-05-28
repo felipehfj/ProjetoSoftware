@@ -14,15 +14,12 @@ public class Expression {
 
     private String expression;
 
-<<<<<<< HEAD
     public Expression() {
     }
 
     public Expression(String expression) {
         this.expression = expression;
     }
-=======
->>>>>>> c5526ad318c027ec1ecd262f0d9472afb864fcc8
 
     public Long getId() {
         return id;

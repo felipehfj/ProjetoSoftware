@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController()
 @RequestMapping("/expression")
@@ -32,4 +33,15 @@ public class ExpressionController {
         Expression expression = repository.findOne(id,Expression.class);
         return ResponseEntity.ok().body(expression);
     }
+
+    //exemplo busca por palavras
+    //localhost:8080/expression/word/palavra
+    @RequestMapping(value = "/containing-word/{word}",method = RequestMethod.GET)
+    public ResponseEntity findByWord(@PathVariable(value="word") String word){
+        List<Expression> expressions = repository.findByWord(word);
+        return ResponseEntity.ok().body(expressions);
+    }
+
+
+
 }
