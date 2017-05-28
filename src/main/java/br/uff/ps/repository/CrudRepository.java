@@ -53,4 +53,13 @@ public class CrudRepository<T> {
         return result;
 
     }
+
+    public List<Expression> findByInitial(Character letter) {
+        Session session = hibernateFactory.openSession();
+        List<Expression> result = session.createSQLQuery("select * from expression" +
+                " where expression " +
+                "LIKE :searchKeyword").setParameter("searchKeyword", letter+"%").list();
+        session.close();
+        return result;
+    }
 }
