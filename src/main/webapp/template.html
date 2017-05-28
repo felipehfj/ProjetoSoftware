@@ -113,7 +113,26 @@
     <!-- Example row of columns -->
     <header>
         <div class="row">
-            Conteúdo
+            <div class="content">
+                <form enctype="application/json" >
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="radio-inline"><input type="radio" name="searchByWord">Busca por palavra</label>
+                            <label class="radio-inline"><input type="radio" name="searchByChar">Busca por Caractere</label>
+                            <label class="radio-inline"><input type="radio" name="searchByWordNumber">Busca por quantidade de palavra</label>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-10">
+                                <input class="form-control" type="search" placeholder="Pesquisa" aria-autocomplete="inline">
+                            </div>
+                            <div class="col-md-2">
+                                <input class="form-control" type="button" placeholder="Pesquisar" value="Pesquisar">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </header>
     

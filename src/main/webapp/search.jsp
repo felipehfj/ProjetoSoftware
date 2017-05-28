@@ -114,11 +114,11 @@
     <header>
         <div class="row">
             <div class="content">
-                <form enctype="application/json" >
+                <form enctype="application/json" action="/">
                     <div class="form-group">
                         <div class="row">
                             <label class="radio-inline"><input type="radio" name="searchByWord">Busca por palavra</label>
-                            <label class="radio-inline"><input type="radio" name="searchByChar">Busca por Caractere</label>
+                            <label class="radio-inline"><input type="radio" name="searchByChar">Busca por Caracter</label>
                             <label class="radio-inline"><input type="radio" name="searchByWordNumber">Busca por quantidade de palavra</label>
                         </div>
 
