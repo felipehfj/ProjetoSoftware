@@ -5,12 +5,13 @@ import br.uff.ps.model.Expression;
 import br.uff.ps.repository.CrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
 
-@RestController()
+@Controller
 @RequestMapping("/expression")
 public class ExpressionController {
 
@@ -60,7 +61,13 @@ public class ExpressionController {
         return ResponseEntity.ok().body(expressions);
     }
 
-
+    @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
+    public ResponseEntity update(@PathVariable(value="id") Long id, @RequestBody Expression newExpression){
+        Expression oldExpression = repository.findOne(id,Expression.class);
+        oldExpression.setExpression(newExpression.getExpression());
+        Expression expression = repository.update(oldExpression);
+        return ResponseEntity.ok().body(expression);
+    }
 
 
 }

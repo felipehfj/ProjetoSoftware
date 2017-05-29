@@ -3,6 +3,7 @@ package br.uff.ps.repository;
 import br.uff.ps.model.Expression;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManagerFactory;
@@ -38,6 +39,16 @@ public class CrudRepository<T> {
         return result;
     }
 
+    public <S extends T> S update (S entity){
+        Session session = hibernateFactory.openSession(); // Referencia do FrameWork Hibernate
+        Transaction transaction = session.beginTransaction();
+        session.update(entity);
+        transaction.commit();
+        session.close();
+        return entity;
+    }
+
+
     public void delete(T entity) {
         Session session = hibernateFactory.openSession();
         session.delete(entity);
@@ -47,8 +58,8 @@ public class CrudRepository<T> {
     public List<Expression> findByWord(String word) {
         Session session = hibernateFactory.openSession();
         List<Expression> result = session.createSQLQuery("select * from expression" +
-                                                                    " where expression " +
-                                                                "LIKE :searchKeyword").setParameter("searchKeyword","%"+word+"%").list();
+                " where expression " +
+                "LIKE :searchKeyword").setParameter("searchKeyword","%"+word+"%").list();
         session.close();
         return result;
 
