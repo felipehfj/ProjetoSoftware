@@ -3,6 +3,7 @@ package br.uff.ps.repository;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import javax.persistence.EntityManagerFactory;
 import java.util.List;
@@ -10,9 +11,11 @@ import java.util.List;
 public abstract class AbstractRepository<T> {
 
     protected SessionFactory hibernateFactory;
+    protected final Class<T> type;
 
-    public AbstractRepository(EntityManagerFactory factory) {
+    public AbstractRepository(EntityManagerFactory factory, Class<T> expressionClass) {
         this.hibernateFactory = factory.unwrap(SessionFactory.class);
+        this.type = expressionClass;
     }
 
     public <S extends T> S save(S entity) {
@@ -22,9 +25,18 @@ public abstract class AbstractRepository<T> {
         return entity;
     }
 
-    public T findOne(Long id, Class<T> clazz) {
+    public <S extends T> S update (S entity){
+        Session session = hibernateFactory.openSession(); // Referencia do FrameWork Hibernate
+        Transaction transaction = session.beginTransaction();
+        session.update(entity);
+        transaction.commit();
+        session.close();
+        return entity;
+    }
+
+    public T findOne(Long id) {
         Session session = hibernateFactory.openSession();
-        T entity = session.get(clazz, id);
+        T entity = session.get(type, id);
         session.close();
         return entity;
     }

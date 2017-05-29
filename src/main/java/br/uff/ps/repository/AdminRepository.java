@@ -10,8 +10,9 @@ import javax.persistence.EntityManagerFactory;
 public class AdminRepository<T> extends AbstractRepository<T> {
 
     @Autowired
-    public AdminRepository(EntityManagerFactory factory) {
-        super(factory);
+    public AdminRepository(EntityManagerFactory factory, Class<T> adminClass) {
+        super(factory, adminClass);
     }
+
 
 }

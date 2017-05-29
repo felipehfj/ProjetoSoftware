@@ -14,6 +14,8 @@ public class Expression {
 
     private String expression;
 
+    private Integer wordCount;
+
     public Expression() {
     }
 
@@ -35,5 +37,18 @@ public class Expression {
 
     public void setExpression(String expression) {
         this.expression = expression;
+        calculateWordCount();
+    }
+
+    public Integer getWordCount() {
+        return wordCount;
+    }
+
+    public void setWordCount(Integer wordCount) {
+        this.wordCount = wordCount;
+    }
+
+    public void calculateWordCount() {
+        this.wordCount = this.expression.split(" ").length;
     }
 }
