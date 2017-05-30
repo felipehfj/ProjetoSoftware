@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.net.URI;
 import java.util.List;
 
@@ -36,15 +37,31 @@ public class ExpressionController {
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     public ResponseEntity findOne(@PathVariable(value="id") Long id){
         Expression expression = repository.findOne(id);
+        if(expression==null){
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok().body(expression);
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
     public ResponseEntity update(@PathVariable(value="id") Long id, @RequestBody Expression newExpression){
         Expression oldExpression = repository.findOne(id);
+        if(oldExpression == null){
+            return ResponseEntity.notFound().build();
+        }
         oldExpression.setExpression(newExpression.getExpression());
         Expression expression = repository.update(oldExpression);
         return ResponseEntity.ok().body(expression);
+    }
+
+    @Transactional
+    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    public ResponseEntity update(@PathVariable(value="id") Long id){
+        boolean deleted = repository.deleteById(id);
+        if(!deleted){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().build();
     }
 
 }

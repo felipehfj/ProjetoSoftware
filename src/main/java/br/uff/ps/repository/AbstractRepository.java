@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import javax.persistence.EntityManagerFactory;
+import javax.transaction.Transactional;
 import java.util.List;
 
 public abstract class AbstractRepository<T> {
@@ -48,10 +49,24 @@ public abstract class AbstractRepository<T> {
         return result;
     }
 
+
     public void delete(T entity) {
         Session session = hibernateFactory.openSession();
         session.delete(entity);
         session.close();
+    }
+
+    public boolean deleteById(Long id) {
+        Session session = hibernateFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        T entity = session.get(type, id);
+        if(entity == null){
+            return false;
+        }
+        session.delete(entity);
+        transaction.commit();
+        session.close();
+        return true;
     }
 
     public void executeQuery(String query) {
