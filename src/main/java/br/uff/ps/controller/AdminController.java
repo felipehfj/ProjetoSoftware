@@ -5,6 +5,7 @@ import br.uff.ps.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,15 +21,15 @@ public class AdminController {
     @Autowired private AdminRepository<Admin> repository;
 
     @RequestMapping("/")   // metodo GET default do Spring Boot
-    public ModelAndView index() {
+    public String index(Model model) {
 
         Admin admin = repository.findOne(1L);
 
-        ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("admin", admin);
+        model.addAttribute("admin", admin);
 
-        return modelAndView;
+        return "greeting";
     }
+
     @RequestMapping(value = "",method = RequestMethod.POST)// Referencia do FrameWork Spring Boot
     public ResponseEntity create(@RequestBody Admin a){// @RequestBody -> recebe mensagem em JSON e transforma
         Admin admin = repository.save(a);

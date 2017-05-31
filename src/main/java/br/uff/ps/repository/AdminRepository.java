@@ -1,7 +1,6 @@
 package br.uff.ps.repository;
 
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
