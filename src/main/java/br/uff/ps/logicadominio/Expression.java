@@ -1,4 +1,4 @@
-package br.uff.ps.model;
+package br.uff.ps.logicadominio;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -1,6 +1,6 @@
-package br.uff.ps.controller;
+package br.uff.ps.controle;
 
-import br.uff.ps.model.Expression;
+import br.uff.ps.logicadominio.Expression;
 import br.uff.ps.servicostecnicos.ExpressionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,7 +1,7 @@
 package br.uff.ps;
 
-import br.uff.ps.model.Admin;
-import br.uff.ps.model.Expression;
+import br.uff.ps.logicadominio.Admin;
+import br.uff.ps.logicadominio.Expression;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
