@@ -40,6 +40,7 @@ public class ExpressionController {
         if(expression==null){
             return ResponseEntity.notFound().build();
         }
+        this.gageExpression(expression);
         return ResponseEntity.ok().body(expression);
     }
 
@@ -50,6 +51,7 @@ public class ExpressionController {
             return ResponseEntity.notFound().build();
         }
         oldExpression.setExpression(newExpression.getExpression());
+        gageExpression(oldExpression);
         Expression expression = repository.update(oldExpression);
         return ResponseEntity.ok().body(expression);
     }
@@ -64,4 +66,7 @@ public class ExpressionController {
         return ResponseEntity.ok().build();
     }
 
+    private void gageExpression(Expression expression){
+        expression.setExpression(expression.getExpression().toLowerCase());
+    }
 }
