@@ -33,6 +33,12 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            alert("YAY1");
+        });
+    </script>
     <![endif]-->
 </head>
 
@@ -117,17 +123,17 @@
                 <form enctype="application/json" >
                     <div class="form-group">
                         <div class="row">
-                            <label class="radio-inline"><input type="radio" name="searchByWord">Busca por palavra</label>
-                            <label class="radio-inline"><input type="radio" name="searchByChar">Busca por Caractere</label>
-                            <label class="radio-inline"><input type="radio" name="searchByWordNumber">Busca por quantidade de palavra</label>
+                            <label class="radio-inline"><input type="radio" name="selection" value="word">Busca por palavra</label>
+                            <label class="radio-inline"><input type="radio" name="selection" value="char">Busca por Caractere</label>
+                            <label class="radio-inline"><input type="radio" name="selection" value="quantity">Busca por quantidade de palavra</label>
                         </div>
 
                         <div class="row">
                             <div class="col-md-10">
-                                <input class="form-control" type="search" placeholder="Pesquisa" aria-autocomplete="inline">
+                                <input id="query" name="query" class="form-control" type="search" placeholder="Pesquisa" aria-autocomplete="inline">
                             </div>
                             <div class="col-md-2">
-                                <input class="form-control" type="button" placeholder="Pesquisar" value="Pesquisar">
+                                <input id="pesquisar" class="form-control" type="button" placeholder="Pesquisar" value="Pesquisar">
                             </div>
                         </div>
                     </div>
@@ -150,6 +156,34 @@
 <script src="assets/js/jquery-1.11.1.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="assets/js/scripts.js"></script>
+
+<script type="text/javascript">
+    $(function() {
+        $("#pesquisar").click(function () {
+
+            var uri = "/expression?";
+            var radioValue = $("input[name='selection']:checked").val();
+
+            if(radioValue == "word"){
+                uri = uri + "word="
+            } else if (radioValue == "char") {
+                uri = uri + "letter="
+            } else if (radioValue == "quantity") {
+                uri = uri + "wordCount="
+            }
+
+            uri = uri + $("#query").val();
+
+            $.ajax({
+                url: uri
+            }).done(function( data ) {
+                if ( console && console.log ) {
+                    console.log( "Sample of data:", data );
+                }
+            });
+        });
+    });
+</script>
 
 <!--[if lt IE 10]>
 <script src="assets/js/placeholder.js"></script>
