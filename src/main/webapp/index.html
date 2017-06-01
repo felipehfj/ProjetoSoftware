@@ -123,7 +123,7 @@
                 <form enctype="application/json" >
                     <div class="form-group">
                         <div class="row">
-                            <label class="radio-inline"><input type="radio" name="selection" value="word">Busca por palavra</label>
+                            <label class="radio-inline"><input type="radio" name="selection" value="word" checked>Busca por palavra</label>
                             <label class="radio-inline"><input type="radio" name="selection" value="char">Busca por Caractere</label>
                             <label class="radio-inline"><input type="radio" name="selection" value="quantity">Busca por quantidade de palavra</label>
                         </div>
@@ -142,7 +142,17 @@
         </div>
     </header>
     
-    <hr>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Expressão
+                </th>
+            </tr>
+        </thead>
+        <tbody class="table-result">
+        </tbody>
+    </table>
 
     <footer>
         <p>&copy; 2017 Trabalho Projeto de Software, UFF.</p>
@@ -179,6 +189,10 @@
             }).done(function( data ) {
                 if ( console && console.log ) {
                     console.log( "Sample of data:", data );
+//                    $(".table-result").empty();
+                    $.each(data, function (index, value) {
+                        $(".table-result").append("<tr><td>"+value.expression+"</td></tr>");
+                    });
                 }
             });
         });

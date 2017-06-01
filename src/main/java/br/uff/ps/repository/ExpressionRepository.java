@@ -21,7 +21,7 @@ public class ExpressionRepository<T> extends AbstractRepository<T> {
         return super.findAll("expression");
     }
 
-    public List find(String word, Character letter, Integer wordCount) {
+    public List<T> find(String word, Character letter, Integer wordCount) {
 
         Session session = hibernateFactory.openSession();
         StringBuilder query = new StringBuilder("select * from expression");
