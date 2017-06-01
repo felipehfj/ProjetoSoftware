@@ -1,4 +1,4 @@
-package br.uff.ps.repository;
+package br.uff.ps.servicostecnicos;
 
 
 import org.apache.commons.lang3.StringUtils;

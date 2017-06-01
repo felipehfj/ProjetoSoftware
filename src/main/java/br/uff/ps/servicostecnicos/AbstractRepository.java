@@ -1,4 +1,4 @@
-package br.uff.ps.repository;
+package br.uff.ps.servicostecnicos;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -6,7 +6,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import javax.persistence.EntityManagerFactory;
-import javax.transaction.Transactional;
 import java.util.List;
 
 public abstract class AbstractRepository<T> {

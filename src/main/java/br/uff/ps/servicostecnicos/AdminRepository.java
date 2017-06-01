@@ -1,4 +1,4 @@
-package br.uff.ps.repository;
+package br.uff.ps.servicostecnicos;
 
 
 import org.hibernate.Session;

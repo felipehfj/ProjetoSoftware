@@ -1,7 +1,7 @@
 package br.uff.ps.controller;
 
 import br.uff.ps.model.Expression;
-import br.uff.ps.repository.ExpressionRepository;
+import br.uff.ps.servicostecnicos.ExpressionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
