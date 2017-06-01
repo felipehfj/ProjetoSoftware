@@ -89,14 +89,14 @@
                         <li>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                                    <form class="form" role="form" method="GET" action="/auth" accept-charset="UTF-8" id="login-nav">
                                         <div class="form-group">
-                                             <label class="sr-only" for="email">Email</label>
-                                             <input type="text" class="form-control" id="email" placeholder="E-mail" required>
+                                             <label class="sr-only" for="name">Nome</label>
+                                             <input type="text" class="form-control" name="name" id="name" placeholder="Nome" required>
                                         </div>
                                         <div class="form-group">
-                                                <label class="sr-only" for="senha">Senha</label>
-                                                <input type="password" class="form-control" id="senha" placeholder="Senha" required>
+                                                <label class="sr-only" for="password">Senha</label>
+                                                <input type="password" class="form-control" name="password" id="password" placeholder="Senha" required>
                                         </div>
                                         <div class="form-group">
                                                 <button type="submit" class="btn btn-primary btn-block">Entrar</button>
@@ -123,9 +123,9 @@
                 <form enctype="application/json" >
                     <div class="form-group">
                         <div class="row">
-                            <label class="radio-inline"><input type="radio" name="selection" value="word" checked>Busca por palavra</label><br>
-                            <label class="radio-inline"><input type="radio" name="selection" value="char">Busca por Caractere</label><br>
-                            <label class="radio-inline"><input type="radio" name="selection" value="quantity">Busca por quantidade de palavra</label><br>
+                            <label class="radio-inline"><input type="radio" name="selection" value="word" title="Permite buscar expressões que contenham as palavras informadas" checked >Busca por palavra</label><br>
+                            <label class="radio-inline"><input type="radio" name="selection" value="char" title="Permite buscar expressões que inicia com o caracter informado">Busca por Caractere</label><br>
+                            <label class="radio-inline"><input type="radio" name="selection" value="quantity" title="Permite buscar expressões que contenham quantidade de palavras informada">Busca por quantidade de palavra</label><br>
                         </div>
 
                         <div class="row">
@@ -134,7 +134,7 @@
                             </div><br><br>
                             <div class="col-md-2">
 
-                                <input id="pesquisar" class="form-control" type="button" placeholder="Pesquisar" value="Pesquisar">
+                                <input id="pesquisar" class="form-control" type="button" placeholder="Pesquisar" value="Pesquisar" title="Faz a busca da expressão de acordo com os dados informados">
                             </div>
                         </div>
                     </div>
