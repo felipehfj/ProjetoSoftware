@@ -21,6 +21,7 @@ public class Expression {
 
     public Expression(String expression) {
         this.expression = expression;
+        calculateWordCount();
     }
 
     public Long getId() {
@@ -50,5 +51,14 @@ public class Expression {
 
     public void calculateWordCount() {
         this.wordCount = this.expression.split(" ").length;
+    }
+
+    @Override
+    public String toString() {
+        return "Expression{" +
+                "id=" + id +
+                ", expression='" + expression + '\'' +
+                ", wordCount=" + wordCount +
+                '}';
     }
 }
