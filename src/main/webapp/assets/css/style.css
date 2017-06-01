@@ -312,3 +312,6 @@ footer a:hover, footer a:focus {
 
 }
 
+hidden {
+    display: none;
+}

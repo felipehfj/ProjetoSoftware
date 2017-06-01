@@ -20,11 +20,11 @@ public class AdminRepository<T> extends AbstractRepository<T> {
         return super.findAll("admin");
     }
 
-    public List<T> findByUserName(String name){
+    public T findByUserName(String name){
         Session session = hibernateFactory.openSession();
         String queryString = "select * from admin where name = \""+name+"\"";
         List<T> result = session.createSQLQuery(queryString).addEntity(type).list();
         session.close();
-        return result;
+        return !result.isEmpty() ? result.get(0) : null;
     }
 }

@@ -15,26 +15,23 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
-public class AdminController {
+public class AdminController extends AbstractController {
 
-    @Autowired private AdminRepository<Admin> repository;
-
-    @RequestMapping("/")   // metodo GET default do Spring Boot
+    @RequestMapping(value = "", method = RequestMethod.GET)   // metodo GET do Spring Boot
     public ResponseEntity<List<Admin>> index() {
-
-        List<Admin> admins = repository.findAll();
+        List<Admin> admins = adminRepository.findAll();
         return ResponseEntity.ok(admins);
     }
 
-    @RequestMapping(value = "",method = RequestMethod.POST)// Referencia do FrameWork Spring Boot
+    @RequestMapping(value = "", method = RequestMethod.POST)// Referencia do FrameWork Spring Boot
     public ResponseEntity create(@RequestBody Admin a){// @RequestBody -> recebe mensagem em JSON
-        Admin admin = repository.save(a);
+        Admin admin = adminRepository.save(a);
         return ResponseEntity.created(URI.create("/admin/" + admin.getId())).build();
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     public ResponseEntity findOne(@PathVariable(value="id") Long id) {
-        Admin admin = repository.findOne(id);
+        Admin admin = adminRepository.findOne(id);
         return ResponseEntity.ok().body(admin);
     }
 

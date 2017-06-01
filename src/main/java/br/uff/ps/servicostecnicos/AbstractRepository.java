@@ -13,9 +13,9 @@ public abstract class AbstractRepository<T> {
     protected SessionFactory hibernateFactory;
     protected final Class<T> type;
 
-    public AbstractRepository(EntityManagerFactory factory, Class<T> expressionClass) {
+    public AbstractRepository(EntityManagerFactory factory, Class<T> type) {
         this.hibernateFactory = factory.unwrap(SessionFactory.class);
-        this.type = expressionClass;
+        this.type = type;
     }
 
     public <S extends T> S save(S entity) {

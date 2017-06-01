@@ -21,6 +21,10 @@ public class Admin {
         this.password = password;
     }
 
+    public Admin() {
+
+    }
+
     public Long getId() {
         return id;
     }

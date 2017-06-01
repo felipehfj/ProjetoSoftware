@@ -17,6 +17,7 @@ public class Expression {
     private Integer wordCount;
 
     public Expression() {
+
     }
 
     public Expression(String expression) {
