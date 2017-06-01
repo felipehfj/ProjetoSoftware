@@ -27,7 +27,7 @@ public class ExpressionController {
         return ResponseEntity.ok(expressions);
     }
 
-    @RequestMapping(value = "",method = RequestMethod.POST)// Referencia do FrameWork Spring Boot
+    @RequestMapping(value = "",method = RequestMethod.POST)// @RequestMapping -> Referencia do FrameWork Spring Boot
     public ResponseEntity create(@RequestBody Expression expression){// @RequestBody -> recebe mensagem em JSON e transforma
         repository.save(expression);
         return ResponseEntity.created(URI.create("/expression/"+expression.getId())).build();

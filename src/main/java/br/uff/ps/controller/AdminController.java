@@ -28,7 +28,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "",method = RequestMethod.POST)// Referencia do FrameWork Spring Boot
-    public ResponseEntity create(@RequestBody Admin a){// @RequestBody -> recebe mensagem em JSON e transforma
+    public ResponseEntity create(@RequestBody Admin a){// @RequestBody -> recebe mensagem em JSON
         Admin admin = repository.save(a);
         return ResponseEntity.created(URI.create("/admin/" + admin.getId())).build();
     }

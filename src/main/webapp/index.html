@@ -123,16 +123,17 @@
                 <form enctype="application/json" >
                     <div class="form-group">
                         <div class="row">
-                            <label class="radio-inline"><input type="radio" name="selection" value="word" checked>Busca por palavra</label>
-                            <label class="radio-inline"><input type="radio" name="selection" value="char">Busca por Caractere</label>
-                            <label class="radio-inline"><input type="radio" name="selection" value="quantity">Busca por quantidade de palavra</label>
+                            <label class="radio-inline"><input type="radio" name="selection" value="word" checked>Busca por palavra</label><br>
+                            <label class="radio-inline"><input type="radio" name="selection" value="char">Busca por Caractere</label><br>
+                            <label class="radio-inline"><input type="radio" name="selection" value="quantity">Busca por quantidade de palavra</label><br>
                         </div>
 
                         <div class="row">
                             <div class="col-md-10">
                                 <input id="query" name="query" class="form-control" type="search" placeholder="Pesquisa" aria-autocomplete="inline">
-                            </div>
+                            </div><br><br>
                             <div class="col-md-2">
+
                                 <input id="pesquisar" class="form-control" type="button" placeholder="Pesquisar" value="Pesquisar">
                             </div>
                         </div>
@@ -142,7 +143,7 @@
         </div>
     </header>
     
-    <table>
+    <table id="resulado">
         <thead>
             <tr>
                 <th>
