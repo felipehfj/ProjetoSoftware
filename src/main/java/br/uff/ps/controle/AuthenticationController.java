@@ -1,10 +1,6 @@
 package br.uff.ps.controle;
 
 import br.uff.ps.logicadominio.Admin;
-import br.uff.ps.servicostecnicos.AdminRepository;
-import org.apache.tomcat.util.codec.binary.Base64;
-import org.apache.tomcat.util.codec.binary.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Base64;
 
 @Controller
 @RequestMapping("/auth")
@@ -28,7 +25,7 @@ public class AuthenticationController extends AbstractController {
         }
         else{
             if(admin.getPassword().equals(password)){
-                String encodedAuth = Base64.encodeBase64String(StringUtils.getBytesUtf8(admin.getName() + ":" + admin.getPassword()));
+                String encodedAuth = Base64.getEncoder().encodeToString((admin.getName() + ":" + admin.getPassword()).getBytes());
                 return ResponseEntity.ok().body(encodedAuth);
             }
             else{

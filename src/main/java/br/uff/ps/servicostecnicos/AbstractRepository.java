@@ -43,7 +43,7 @@ public abstract class AbstractRepository<T> {
 
     public List<T> findAll(String clazz) {
         Session session = hibernateFactory.openSession();
-        List result = session.createSQLQuery("select * from " + clazz).list();
+        List result = session.createSQLQuery("select * from " + clazz).addEntity(type).list();
         session.close();
         return result;
     }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.net.URI;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -21,12 +22,18 @@ public class ExpressionController extends AbstractController {
     public ResponseEntity<List<Expression>> index(@RequestParam(required = false) String word,
                   @RequestParam(required = false) Character letter, @RequestParam(required = false) Integer wordCount) {
         List<Expression> expressions = expressionRepository.find(word, letter, wordCount);
+
+        if(word != null) {
+            expressions.removeIf( e -> Arrays.stream(e.getExpression().split(" ")).noneMatch( w -> w.equalsIgnoreCase(word)));
+        }
+
         return ResponseEntity.ok(expressions);
     }
 
     @RequestMapping(value = "",method = RequestMethod.POST)// @RequestMapping -> Referencia do FrameWork Spring Boot
     public ResponseEntity create(HttpServletRequest request, @RequestBody Expression expression){// @RequestBody -> recebe mensagem em JSON e transforma
         if(isUserValid(request)) {
+            gageExpression(expression);
             expressionRepository.save(expression);
             return ResponseEntity.created(URI.create("/expression/" + expression.getId())).build();
         } else {
@@ -42,7 +49,6 @@ public class ExpressionController extends AbstractController {
             if (expression == null) {
                 return ResponseEntity.notFound().build();
             }
-            this.gageExpression(expression);
             return ResponseEntity.ok().body(expression);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Acesso negado.");
@@ -56,6 +62,7 @@ public class ExpressionController extends AbstractController {
             if (oldExpression == null) {
                 return ResponseEntity.notFound().build();
             }
+            gageExpression(newExpression);
             oldExpression.setExpression(newExpression.getExpression());
             Expression expression = expressionRepository.update(oldExpression);
             return ResponseEntity.ok().body(expression);
@@ -81,4 +88,5 @@ public class ExpressionController extends AbstractController {
     private void gageExpression(Expression expression){
         expression.setExpression(expression.getExpression().toLowerCase());
     }
+
 }

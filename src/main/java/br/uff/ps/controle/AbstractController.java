@@ -4,11 +4,10 @@ import br.uff.ps.logicadominio.Admin;
 import br.uff.ps.logicadominio.Expression;
 import br.uff.ps.servicostecnicos.AdminRepository;
 import br.uff.ps.servicostecnicos.ExpressionRepository;
-import org.apache.tomcat.util.codec.binary.Base64;
-import org.apache.tomcat.util.codec.binary.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Base64;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
@@ -22,7 +21,7 @@ public abstract class AbstractController {
     protected boolean isUserValid(HttpServletRequest request) {
         try {
             String encodedAuth = request.getHeaders("Authorization").nextElement().split(" ")[1];
-            String decodedAuth = StringUtils.newStringUtf8(Base64.decodeBase64(encodedAuth));
+            String decodedAuth = new String(Base64.getDecoder().decode(encodedAuth));
             if (isNotBlank(decodedAuth)) {
                 String[] credentials = decodedAuth.split(":");
                 String username = credentials[0];

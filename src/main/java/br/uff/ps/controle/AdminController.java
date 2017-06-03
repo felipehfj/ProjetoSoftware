@@ -1,8 +1,6 @@
 package br.uff.ps.controle;
 
 import br.uff.ps.logicadominio.Admin;
-import br.uff.ps.servicostecnicos.AdminRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
