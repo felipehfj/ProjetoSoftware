@@ -55,7 +55,7 @@
                 Expression</a>
         </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling --> 
+        <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
             </ul>
@@ -104,39 +104,20 @@
         <div class="row">
             <div class="content">
                 <form enctype="application/json" >
-                    <div class="form-group">
+                    <div>
                         <div class="row">
-                            <label class="radio-inline"><input type="radio" name="selection" value="word" title="Permite buscar expressões que contenham as palavras informadas" checked >Busca por palavra</label><br>
-                            <label class="radio-inline"><input type="radio" name="selection" value="char" title="Permite buscar expressões que inicia com o caracter informado">Busca por Caractere</label><br>
-                            <label class="radio-inline"><input type="radio" name="selection" value="quantity" title="Permite buscar expressões que contenham quantidade de palavras informada">Busca por quantidade de palavra</label><br>
+                            <label for="expression">
+                                Expressão: <input id="expression" type="text" name="expression">
+                            </label>
                         </div>
-
                         <div class="row">
-                            <div class="col-md-10">
-                                <input id="query" name="query" class="form-control" type="search" placeholder="Pesquisa" aria-autocomplete="inline">
-                            </div><br><br>
-                            <div class="col-md-2">
-
-                                <input id="pesquisar" class="form-control" type="button" placeholder="Pesquisar" value="Pesquisar" title="Faz a busca da expressão de acordo com os dados informados">
-                            </div>
+                            <input id="criar" class="form-control" type="button" placeholder="Criar" value="Criar" title="Cria expressão">
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </header>
-
-    <table id="resulado">
-        <thead>
-            <tr>
-                <th colspan="2">
-                    Expressão
-                </th>
-            </tr>
-        </thead>
-        <tbody class="table-result">
-        </tbody>
-    </table>
 
     <footer>
         <p>&copy; 2017 Trabalho Projeto de Software, UFF.</p>
@@ -157,61 +138,32 @@
 
         verifyLogin();
 
-        $("#login").click(function () {
-
-            var user = $("#name").val();
-            var password = $("#password").val();
-
-            $.ajax({
-                url: "/auth?" + "name=" + user + "&password=" + password,
-                method: "POST",
-                async: false
-            }).success(function( data, text ) {
-                Cookies.set("token", data);
-                $(".forbidden").each(function() {
-                    $(this).removeClass("hidden");
-                });
-                $("#loginli").addClass("hidden");
-                window.localtion = "/"
-            }).error(function (request, status, error) {
-                alert("Error: " + request.responseText + " Status: " + status + " Error: " + error);
-            });
-        });
-
         $("#logout").click(function () {
             Cookies.remove("token");
             $(".forbidden").addClass("hidden");
             $("#loginli").removeClass("hidden");
+            window.location = "/";
         });
 
-        $("#pesquisar").click(function () {
+        $("#criar").click(function () {
 
-            var uri = "/expression?";
-            var radioValue = $("input[name='selection']:checked").val();
-
-            if(radioValue == "word"){
-                uri = uri + "word="
-            } else if (radioValue == "char") {
-                uri = uri + "letter="
-            } else if (radioValue == "quantity") {
-                uri = uri + "wordCount="
-            }
-
-            uri = uri + $("#query").val();
+            var uri = "/expression";
+            var expression = { "expression": $("#expression").val() };
 
             $.ajax({
-                url: uri
-            }).done(function( data ) {
-                console.log( "Resultado:", data );
-                $(".table-result").empty();
-                $.each(data, function (index, value) {
-                    $(".table-result").append("<tr>");
-                    $(".table-result").append("<td>"+value.expression+"</td>");
-                    if(Cookies.get("token")){
-                        $(".table-result").append("<td><a href=/editar.html?id="+value.id+">editar</a></td>");
-                    }
-                    $(".table-result").append("</tr>");
-                });
+                url: uri,
+                data: JSON.stringify(expression),
+                async: false,
+                method: "POST",
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+                            .setRequestHeader('Authorization', 'Basic ' + Cookies.get("token"));
+                }
+            }).success(function( data, text ) {
+                alert("Expressão criada com sucesso!");
+                window.location = "/";
+            }).error(function (request, status, error) {
+                alert("Error: " + request.responseText + " Status: " + status + " Error: " + error);
             });
         });
     });
@@ -222,6 +174,8 @@
                 $(this).removeClass("hidden");
             });
             $("#loginli").addClass("hidden");
+        } else {
+            window.location = "/"
         }
     }
 </script>
